@@ -6,7 +6,7 @@ import { WordContext } from '../components/WordContext';
 export default function OtherCards() {
     const { words, loading, error } = useContext(WordContext);
 
-    if (loading) return <div>Loading...</div>;
+    if (loading) return <div>Загрузка...</div>;
     if (error) return <div>Error: {error}</div>;
 
     return (
