@@ -10,12 +10,12 @@ import Cards from './pages/Cards';
 import OtherCards from './pages/OtherCards';
 import NotFound from './pages/NotFound';
 import Test from './pages/Test';
+import { WordProvider } from './components/WordContext';
 
 function App() {
   return (
 
-    <>
-    
+    <WordProvider>
       <Router>
       <NavBar/>
       <Routes>
@@ -29,7 +29,7 @@ function App() {
         <Footer/>
       </div>
       </Router>
-    </>
+      </WordProvider>
   );
 }
 

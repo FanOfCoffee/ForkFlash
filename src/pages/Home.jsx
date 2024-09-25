@@ -1,56 +1,39 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { WordContext } from '../components/WordContext';
 import Table from '../components/Table';
 import PopUp from '../components/PopUp';
-import '../assets/styles/Buttons.css';
-import words from '../words.json'
 
+export default function Home() {
+    const { words, loading, error, addWord, updateWord } = useContext(WordContext);
+    const [isPopUpOpen, setPopUpOpen] = useState(false);
+    const [selectedWord, setSelectedWord] = useState(null);
 
-
-function Home() {
-    const [popUpOpen, setPopUpOpen] = useState(false)
-    const [rows, setRows] = useState(words);
-
-    
-    const [rowToChange, setRowToChange] = useState(null)
-    const handleDeleteRow = (targetIndex) => {
-        setRows(rows.filter((_, index) => index !== targetIndex))
-    }
-    
-    const handleChangeRow = (index) => {
-        setRowToChange(index);
-        setPopUpOpen(true);
-    }
-    
-    const handleAdd = (newRow) => {
-        rowToChange === null ? 
-        setRows([...rows, newRow]):
-        setRows(rows.map((currentRow, index) => {
-            if(index !== rowToChange) return currentRow;
-            return newRow;
-        }))
-    }
-    
-    const handleClosePopUp = () => {
+    const handleAddOrUpdate = (word) => {
+        if (selectedWord) {
+            updateWord(selectedWord.id, word);
+        } else {
+            addWord(word);
+        }
         setPopUpOpen(false);
-        setRowToChange(null);
-    }
-    return (
-        <>
+        setSelectedWord(null); 
+    };
 
+    return (
         <div>
-        <Table rows={rows} 
-            deleteRow = {handleDeleteRow}
-            changeRow = {handleChangeRow}/>
-        <div className='p-c'>
-            <button className='add-btn' onClick={() => setPopUpOpen(true)}>Создать слово</button>
+            {loading && <p>Загрузка...</p>}
+            {error && <div className='error'>{error}</div>}
+
+            
+
+            <Table words={words} openPopUp={setPopUpOpen} setSelectedWord={setSelectedWord} />
+            
+            {isPopUpOpen && (
+                <PopUp closePopUp={() => setPopUpOpen(false)} onSubmit={handleAddOrUpdate} defaultValue={selectedWord} />
+            )}
+            <div className='p-c'>
+                <button className='add-btn' onClick={() => setPopUpOpen(true)}>Создать слово</button>
+            </div>
         </div>
-            {popUpOpen && <PopUp closePopUp={handleClosePopUp} 
-            onSubmit = {handleAdd}
-            defaultValue = {rowToChange !== null && rows[rowToChange]}
-            />}
-        </div>
-            </>
-    )
+    );
 }
 
-export default Home

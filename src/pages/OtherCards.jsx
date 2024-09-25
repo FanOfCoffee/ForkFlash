@@ -1,14 +1,17 @@
-import React, { useState} from 'react';
+import React, { useContext } from 'react';
 import '../assets/styles/Buttons.css';
-
 import FlashCardSlider from '../components/FlashCardSlider';
-import words from '../words.json'
+import { WordContext } from '../components/WordContext';
 
 export default function OtherCards() {
-    const [flashcards, setFlashcards] = useState(words)
+    const { words, loading, error } = useContext(WordContext);
+
+    if (loading) return <div>Loading...</div>;
+    if (error) return <div>Error: {error}</div>;
+
     return (
         <>
-            <FlashCardSlider flashcards={flashcards}/>
+            <FlashCardSlider flashcards={words} />
         </>
-    )
-    }
+    );
+}

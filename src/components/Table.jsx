@@ -1,9 +1,18 @@
-import React from 'react'
+import React, { useContext }  from 'react'
 import '../assets/styles/Table.css'
 import {BsFillTrashFill, BsFillPencilFill} from 'react-icons/bs'
+import { WordContext } from './WordContext';
 
-export default function Table({rows, deleteRow, changeRow}) {
+export default function Table({openPopUp, setSelectedWord}) {
+    const { words, deleteWord } = useContext(WordContext);
+
+    const handleEdit = (word) => {
+        setSelectedWord(word);
+        openPopUp(true);
+    };
+
     return (
+
         <div className='table-wrapper'>
             <table className='table'>
                 <thead>
@@ -16,22 +25,18 @@ export default function Table({rows, deleteRow, changeRow}) {
                     </tr>
                 </thead>
                 <tbody>
-                    {rows.map((row, index) => {
-                        const wordText = row.word.charAt(0).toUpperCase() + row.word.slice(1);
-                        const categoryText = row.category.charAt(0).toUpperCase() + row.category.slice(1);
-                        return (<tr key={index}>
-                                <td>{wordText}</td>
-                                <td>[{row.pronunciation}]</td>
-                                <td>{row.k_word}</td>
-                                <td>{categoryText}</td>
-                                <td>
-                                    <span className='actions'>
-                                        <BsFillPencilFill className='change-btn' onClick={() => changeRow(index)}/>
-                                        <BsFillTrashFill className='delete-btn' onClick={() => deleteRow(index)}/>
-                                    </span>
+                {words.map((word) => (
+                    <tr key={word.id}>
+                        <td>{word.word}</td>
+                        <td>{word.pronunciation}</td>
+                        <td>{word.k_word}</td>
+                        <td>{word.category}</td>
+                        <td>
+                            <BsFillPencilFill className='change-btn' onClick={() => handleEdit(word)}/>
+                            <BsFillTrashFill className='delete-btn' onClick={() => deleteWord(word.id)}/>
                         </td>
-                            </tr>) 
-                        })}
+                    </tr>
+                ))}
                 </tbody>
             </table>
         </div>
