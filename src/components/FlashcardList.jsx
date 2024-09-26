@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { WordContext } from '../components/WordContext';
 import Flashcard from './Flashcard';
+import LoadingIndicator from './LoadingIndicator';
 
 export default function FlashcardList() {
     const { words, loading, error } = useContext(WordContext); 
@@ -10,7 +11,7 @@ export default function FlashcardList() {
         setCount(count + 1);
     };
 
-    if (loading) return <p>Загрузка...</p>; 
+    if (loading) return <LoadingIndicator/>; 
     if (error) return <div className='error'>{error}</div>;
     return (
         <>

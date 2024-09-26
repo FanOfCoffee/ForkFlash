@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { WordContext } from '../components/WordContext';
 import Table from '../components/Table';
 import PopUp from '../components/PopUp';
+import LoadingIndicator from '../components/LoadingIndicator';
 
 export default function Home() {
     const { words, loading, error, addWord, updateWord } = useContext(WordContext);
@@ -20,7 +21,7 @@ export default function Home() {
 
     return (
         <div>
-            {loading && <p>Загрузка...</p>}
+            {loading && <LoadingIndicator />}
             {error && <div className='error'>{error}</div>}
 
             
