@@ -10,7 +10,7 @@ import Cards from './pages/Cards';
 import OtherCards from './pages/OtherCards';
 import NotFound from './pages/NotFound';
 import Test from './pages/Test';
-import { WordProvider } from './components/WordContext';
+import { WordProvider } from './context/WordContext';
 
 function App() {
   return (

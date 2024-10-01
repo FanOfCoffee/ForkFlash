@@ -7,8 +7,8 @@ const LoadingIndicator = () => {
             <div className="loader"></div>
             <p>Загрузка...</p>
         </div>*/
-        <div class="overlay-loader">
-            <div class="loader">
+        <div className="overlay-loader">
+            <div className="loader">
                 <div></div>
                 <div></div>
                 <div></div>

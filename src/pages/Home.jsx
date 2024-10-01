@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { WordContext } from '../components/WordContext';
+import { WordContext } from '../context/WordContext';
 import Table from '../components/Table';
 import PopUp from '../components/PopUp';
 import LoadingIndicator from '../components/LoadingIndicator';

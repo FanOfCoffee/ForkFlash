@@ -1,7 +1,7 @@
 import React, { useContext }  from 'react'
 import '../assets/styles/Table.css'
 import {BsFillTrashFill, BsFillPencilFill} from 'react-icons/bs'
-import { WordContext } from './WordContext';
+import { WordContext } from '../context/WordContext';
 
 export default function Table({openPopUp, setSelectedWord}) {
     const { words, deleteWord } = useContext(WordContext);

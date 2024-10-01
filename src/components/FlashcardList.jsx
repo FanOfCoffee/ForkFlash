@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { WordContext } from '../components/WordContext';
+import { WordContext } from '../context/WordContext';
 import Flashcard from './Flashcard';
 import LoadingIndicator from './LoadingIndicator';
 
