@@ -33,8 +33,9 @@ const WordProvider = ({ children }) => {
 
     const addWord = async (newWord) => {
         try {
-            const response = await fetch('http://itgirlschool.justmakeit.ru/api/words/add', {
+            const response = await fetch('/api/words/add', {
                 method: 'POST',
+                mode: 'cors',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(newWord),
             });
@@ -47,8 +48,9 @@ const WordProvider = ({ children }) => {
 
     const updateWord = async (id, updatedWord) => {
         try {
-            const response = await fetch(`http://itgirlschool.justmakeit.ru/api/words/${id}/update`, {
+            const response = await fetch(`/api/words/${id}/update`, {
                 method: 'POST',
+                mode: 'cors',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(updatedWord),
             });
@@ -61,8 +63,9 @@ const WordProvider = ({ children }) => {
 
     const deleteWord = async (id) => {
         try {
-            const response = await fetch(`http://itgirlschool.justmakeit.ru/api/words/${id}/delete`, {
+            const response = await fetch(`/api/words/${id}/delete`, {
                 method: 'DELETE',
+                mode: 'cors',
             });
             if (!response.ok) throw new Error('Ошибка при удалении слова');
             fetchWords(); 
